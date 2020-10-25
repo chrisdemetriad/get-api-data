@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
-const PostsList = () => {
+const PostsList = ({ navigation }) => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
@@ -11,7 +11,16 @@ const PostsList = () => {
 	const renderItem = ({ item }) => {
 		return (
 			<View style={styles.itemRow}>
-				<Text>{item.title}</Text>
+				<Text
+					onPress={() =>
+						navigation.navigate("Post", {
+							userId: item.userId,
+							id: item.id,
+						})
+					}
+				>
+					{item.title}
+				</Text>
 			</View>
 		);
 	};
