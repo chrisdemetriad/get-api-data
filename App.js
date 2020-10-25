@@ -1,44 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
+
+import PostsList from "./screens/PostsList";
+import Post from "./screens/Post";
+
 const App = () => {
-	const [data, setData] = useState([]);
-
-	useEffect(() => {
-		getPosts();
-	}, []);
-
-	const renderItem = ({ item }) => {
-		return (
-			<View style={styles.itemRow}>
-				<Text>{item.title}</Text>
-			</View>
-		);
-	};
-
-	const getPosts = async () => {
-		const rawnetApi = "https://cors-anywhere.herokuapp.com/https://rawnet-react-native-test.glitch.me/posts.json";
-		fetch(rawnetApi, {
-			// mode: "no-cors"
-		})
-			.then((response) => response.json())
-			.then((json) => {
-				setData(json);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-
-	return <FlatList style={styles.container} data={data} renderItem={renderItem} keyExtractor={(item, index) => index.toString()} />;
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen name="PostsList" component={PostsList} options={{ title: "Posts List" }} />
+				<Stack.Screen name="Post" component={Post} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#f5fcff",
-	},
-	itemRow: { borderBottomColor: "#eee", padding: 10, borderBottomWidth: 1 },
-});
