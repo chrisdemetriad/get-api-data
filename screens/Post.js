@@ -47,8 +47,8 @@ const Post = ({ route }) => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}>Title: {JSON.stringify(title)}</Text>
-			<Text style={styles.text}>Post: {JSON.stringify(body)}</Text>
+			<Text style={styles.text}>Title: {title}</Text>
+			<Text style={styles.text}>Post: {body}</Text>
 			<Text style={styles.text}>Author: {author}</Text>
 			<Text style={styles.text}>Email: {email}</Text>
 			<Text style={styles.text}>Comments: </Text>
