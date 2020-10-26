@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import React from "react";
+
+import PostsList from "./screens/PostsList";
+import Post from "./screens/Post";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
-
-import PostsList from "./screens/PostsList";
-import Post from "./screens/Post";
 
 const App = () => {
 	return (

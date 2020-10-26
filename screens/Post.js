@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { CORS_PROXY, CORS_ANYWHERE_PROXY } from "./../utils/constants";
 
-const Post = ({ route, navigation }) => {
+const Post = ({ route }) => {
 	const { userId, title, body, postId } = route.params;
 
 	const [author, setAuthor] = useState("");
@@ -13,26 +14,12 @@ const Post = ({ route, navigation }) => {
 	}, []);
 
 	const getUsers = async () => {
-		// const rawnetUsersApi = "https://cors-anywhere.herokuapp.com/https://rawnet-react-native-test.glitch.me/users.json";
-		// fetch(rawnetUsersApi)
-		// 	.then((response) => response.json())
-		// 	.then((json) => {
-		// 		setUsers(json);
-		// 		console.log(json);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 	})
-		// 	.finally(() => {
-		// 		console.log("FINALLY!");
-		// 	});
-
-		const rawnetUsersApi = "https://cors-anywhere.herokuapp.com/https://rawnet-react-native-test.glitch.me/users.json";
-		const rawnetCommentsApi = "https://cors-anywhere.herokuapp.com/https://rawnet-react-native-test.glitch.me/comments.json";
+		// switch to CORS_ANYWHERE_PROX, if slow or not responding
+		const rawnetUsersApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/users.json";
+		const rawnetCommentsApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/comments.json";
 
 		Promise.all([fetch(rawnetUsersApi), fetch(rawnetCommentsApi)])
 			.then(function (responses) {
-				// Get a JSON object both responses
 				return Promise.all(
 					responses.map(function (response) {
 						return response.json();
@@ -45,15 +32,15 @@ const Post = ({ route, navigation }) => {
 				const email = data[0][userId - 1].email;
 				setAuthor(name);
 				setEmail(email);
-				console.log(data[0][userId - 1]);
-				console.log(commentsArray);
+				// console.log(data[0][userId - 1]);
+				// console.log(commentsArray);
 
 				const comments = commentsArray.filter((comment) => {
 					return comment.postId === postId;
 				});
 
 				setComments(comments);
-				console.log(comments);
+				// console.log(comments);
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -62,7 +49,7 @@ const Post = ({ route, navigation }) => {
 
 	return (
 		<View>
-			<Text>Post id: {JSON.stringify(postId)}</Text>
+			{/* <Text>Post id: {JSON.stringify(postId)}</Text> */}
 			<Text>User id: {JSON.stringify(userId)}</Text>
 
 			<Text>Title: {JSON.stringify(title)}</Text>
@@ -73,7 +60,13 @@ const Post = ({ route, navigation }) => {
 			<Text>Email: {email}</Text>
 			<Text>Comments: </Text>
 			{comments.map((comment) => {
-				return <Text key={comment.id}>{comment.name}</Text>;
+				return (
+					<View key={comment.id}>
+						<Text>{comment.name}</Text>
+						<Text>{comment.email}</Text>
+						<Text>{comment.body}</Text>
+					</View>
+				);
 			})}
 		</View>
 	);
