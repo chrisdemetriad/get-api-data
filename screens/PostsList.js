@@ -15,7 +15,9 @@ const PostsList = ({ navigation }) => {
 					onPress={() =>
 						navigation.navigate("Post", {
 							userId: item.userId,
-							id: item.id,
+							title: item.title,
+							body: item.body,
+							postId: item.id,
 						})
 					}
 				>
@@ -26,8 +28,8 @@ const PostsList = ({ navigation }) => {
 	};
 
 	const getPosts = async () => {
-		const rawnetApi = "https://cors-anywhere.herokuapp.com/https://rawnet-react-native-test.glitch.me/posts.json";
-		fetch(rawnetApi, {
+		const rawnetPostsApi = "https://cors-anywhere.herokuapp.com/https://rawnet-react-native-test.glitch.me/posts.json";
+		fetch(rawnetPostsApi, {
 			// mode: "no-cors"
 		})
 			.then((response) => response.json())
