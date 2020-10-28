@@ -14,9 +14,14 @@ const Post = ({ route }) => {
 	}, []);
 
 	const getUsers = async () => {
+		// the proxy used due to the CORS wall doesn't work in Expo's mobile simulators, so commenting it out for now
+		// In a real world scenario the appropriate headers should be set server side, using a local proxy could also be a solution
 		// switch to CORS_ANYWHERE_PROX, if slow or not responding
-		const rawnetUsersApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/users.json";
-		const rawnetCommentsApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/comments.json";
+		// const rawnetUsersApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/users.json";
+		// const rawnetCommentsApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/comments.json";
+
+		const rawnetUsersApi = "https://rawnet-react-native-test.glitch.me/users.json";
+		const rawnetCommentsApi = "https://rawnet-react-native-test.glitch.me/comments.json";
 
 		Promise.all([fetch(rawnetUsersApi), fetch(rawnetCommentsApi)])
 			.then(function (responses) {

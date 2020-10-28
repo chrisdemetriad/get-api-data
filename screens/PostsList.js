@@ -30,7 +30,8 @@ const PostsList = ({ navigation }) => {
 
 	const getPosts = async () => {
 		// switch to CORS_ANYWHERE_PROX, if slow or not responding
-		const rawnetPostsApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/posts.json";
+		// const rawnetPostsApi = CORS_PROXY + "https://rawnet-react-native-test.glitch.me/posts.json";
+		const rawnetPostsApi = "https://rawnet-react-native-test.glitch.me/posts.json";
 		fetch(rawnetPostsApi)
 			.then((response) => response.json())
 			.then((json) => {
