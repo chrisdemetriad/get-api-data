@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { CORS_PROXY, CORS_ANYWHERE_PROXY } from "./../utils/constants";
 
 const Post = ({ route }) => {
@@ -51,22 +51,24 @@ const Post = ({ route }) => {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>Title: {title}</Text>
-			<Text style={styles.text}>Post: {body}</Text>
-			<Text style={styles.text}>Author: {author}</Text>
-			<Text style={styles.text}>Email: {email}</Text>
-			<Text style={styles.text}>Comments: </Text>
-			{comments.map((comment) => {
-				return (
-					<View key={comment.id} style={styles.text}>
-						<Text style={styles.comment}>From: {comment.email}</Text>
-						<Text style={[styles.comment, styles.separator]}>Title: {comment.name}</Text>
-						<Text style={styles.comment}>Comment: {comment.body}</Text>
-					</View>
-				);
-			})}
-		</View>
+		<ScrollView>
+			<View style={styles.container}>
+				<Text style={styles.text}>Title: {title}</Text>
+				<Text style={styles.text}>Post: {body}</Text>
+				<Text style={styles.text}>Author: {author}</Text>
+				<Text style={styles.text}>Email: {email}</Text>
+				<Text style={styles.text}>Comments: </Text>
+				{comments.map((comment) => {
+					return (
+						<View key={comment.id} style={styles.text}>
+							<Text style={styles.comment}>From: {comment.email}</Text>
+							<Text style={[styles.comment, styles.separator]}>Title: {comment.name}</Text>
+							<Text style={styles.comment}>Comment: {comment.body}</Text>
+						</View>
+					);
+				})}
+			</View>
+		</ScrollView>
 	);
 };
 
